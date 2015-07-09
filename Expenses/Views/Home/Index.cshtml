@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Expenses</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
+    <script src="~/Scripts/expenses.js"></script>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+</head>
+<body>
+    <div ng-app="expensesApp" ng-controller="ExpCtrl">
+        <div class="container">
+            <h3>New Expense</h3>
+            <div class="row top-buffer">
+                <div class="col-md-12">
+                    <div class="col-md-1">
+                        Date:
+                    </div>
+                    <div class="col-md-11">
+                        <input type="text" ng-model="expense.Date" />
+                    </div>
+                </div>
+            </div>
+            <div class="row top-buffer">
+                <div class="col-md-12">
+                    <div class="col-md-1">
+                        Description:
+                    </div>
+                    <div class="col-md-11">
+                        <textarea ng-model="expense.description" cols="30"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row top-buffer">
+                <div class="col-md-12">
+                    <div class="col-md-1">
+                        Category:
+                    </div>
+                    <div class="col-md-11">
+                        <input type="text" ng-model="expense.category" />
+                    </div>
+                </div>
+            </div>
+            <div class="row top-buffer">
+                <div class="col-md-12">
+                    <div class="col-md-1">
+                        Subcategory:
+                    </div>
+                    <div class="col-md-11">
+                        <input type="text" ng-model="expense.subCategory" />
+                    </div>
+                </div>
+            </div>
+            <div class="row top-buffer">
+                <div class="col-md-12">
+                    <div class="col-md-1">
+                        Amount:
+                    </div>
+                    <div class="col-md-11">
+                        <input type="text" ng-model="expense.amount" />
+                    </div>
+                </div>
+            </div>
+            <div class="row top-buffer">
+                <div class="col-md-12">
+                    <div class="col-md-3">
+                        <a href="/" class="btn btn-primary btn-md">Save</a>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <h3>Submitted</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <td><a href="/" style="color:blue;text-decoration:underline"><strong>Date</strong></a></td>
+                                <td><strong>Description</strong></td>
+                                <td><strong>Category</strong></td>
+                                <td><strong>Subcategory</strong></td>
+                                <td><strong>Amount</strong></td>
+                            </tr>
+                        </thead>
+                        <tr ng-repeat="expense in expenses">
+                            <td>{{expense.ExpenseDate}}</td>
+                            <td>{{expense.Description}}</td>
+                            <td>{{expense.Category}}</td>
+                            <td>{{expense.SubCategory}}</td>
+                            <td>{{expense.ExpenseAmount}}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
