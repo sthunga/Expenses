@@ -45,11 +45,6 @@
                             Category<span style="margin-left:3px;color:red">*</span>
                         </div>
                         <div class="col-md-11">
-
-                            @*<input type="text" ng-model="customSelected" placeholder="Custom template" typeahead="state as state.name for state in statesWithFlags | filter:{name:$viewValue}" typeahead-template-url="customTemplate.html" class="form-control ng-valid ng-dirty ng-valid-parse ng-touched" aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-65-1967">*@
-
-                            @*<input name="expCategory" type="text" ng-model="newExpense.Category" typeahead="category as expense.Category for expense in expenses | filter:$viewValue | limitTo:8" maxlength="25" ng-required="true" ng-pattern="/^[a-zA-Z0-9]+$/" class="form-control ng-valid ng-dirty ng-valid-parse ng-touched" aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-65-1967">*@
-
                             <input name="expCategory" type="text" ng-model="newExpense.Category" maxlength="25" ng-required="true" ng-pattern="/^[a-zA-Z0-9]+$/" />
                             <span ng-show="expenseForm.expCategory.$error.pattern" style="color:red">Cannot contain special characters</span>
                         </div>
