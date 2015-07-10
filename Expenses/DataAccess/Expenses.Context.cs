@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Expenses.Models
+namespace Expenses.DataAccess
 {
     using System;
     using System.Data.Entity;
@@ -25,6 +25,6 @@ namespace Expenses.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Expens> Expenses { get; set; }
+        public virtual DbSet<Expense> Expenses { get; set; }
     }
 }

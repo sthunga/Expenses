@@ -42,6 +42,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Entity.Design" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -172,39 +175,35 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ExpenseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Expens.cs">
+    <Compile Include="DataAccess\Expense.cs">
       <DependentUpon>Expenses.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ExpenseModel.cs" />
-    <Compile Include="Models\Expenses.Context.cs">
+    <Compile Include="DataAccess\Expenses.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Expenses.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Expenses.cs">
+    <Compile Include="DataAccess\Expenses.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Expenses.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Expenses.Designer.cs">
+    <Compile Include="DataAccess\Expenses.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Expenses.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ExpenseModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\ExpenseData.mdf" />
-    <Content Include="App_Data\ExpenseData_log.ldf">
-      <DependentUpon>ExpenseData.mdf</DependentUpon>
-    </Content>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -212,6 +211,7 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\expenses.js" />
+    <Content Include="Scripts\ui-bootstrap-tpls-0.13.0.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -224,23 +224,24 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Scripts\Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <EntityDeploy Include="Models\Expenses.edmx">
+    <EntityDeploy Include="DataAccess\Expenses.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Expenses.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\Expenses.Context.tt">
+    <Content Include="DataAccess\Expenses.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Expenses.edmx</DependentUpon>
       <LastGenOutput>Expenses.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Expenses.edmx.diagram">
+    <Content Include="DataAccess\Expenses.edmx.diagram">
       <DependentUpon>Expenses.edmx</DependentUpon>
     </Content>
-    <Content Include="Models\Expenses.tt">
+    <Content Include="DataAccess\Expenses.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Expenses.edmx</DependentUpon>
       <LastGenOutput>Expenses.cs</LastGenOutput>

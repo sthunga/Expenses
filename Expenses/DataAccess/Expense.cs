@@ -7,19 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Expenses.Models
+namespace Expenses.DataAccess
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Expens
+    public partial class Expense
     {
         public int Id { get; set; }
-        public System.DateTime ExpenseDate { get; set; }
-        public decimal ExpenseAmount { get; set; }
         public string Category { get; set; }
         public string SubCategory { get; set; }
         public string Description { get; set; }
+        public System.DateTime ExpenseDate { get; set; }
+        public decimal ExpenseAmount { get; set; }
         public System.DateTime DateCreated { get; set; }
         public string UserCreated { get; set; }
         public System.DateTime DateModified { get; set; }

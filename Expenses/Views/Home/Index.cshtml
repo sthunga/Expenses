@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>Expenses</title>
+    <title>New Expense Item</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -12,93 +12,106 @@
 </head>
 <body>
     <div ng-app="expensesApp" ng-controller="ExpCtrl">
-        <div class="container">
-            <h3>New Expense</h3>
-            <div class="row top-buffer">
-                <div class="col-md-12">
-                    <div class="col-md-1">
-                        Date:
-                    </div>
-                    <div class="col-md-11">
-                        <input type="text" ng-model="expense.Date" />
-                    </div>
-                </div>
-            </div>
-            <div class="row top-buffer">
-                <div class="col-md-12">
-                    <div class="col-md-1">
-                        Description:
-                    </div>
-                    <div class="col-md-11">
-                        <textarea ng-model="expense.description" cols="30"></textarea>
+        <form name="expenseForm">
+            <div class="container">
+                <h3>New Expense</h3>
+                <div class="row top-buffer">
+                    <div class="col-md-12">
+                        <div class="col-md-1">
+                            Date<span style="margin-left:3px;color:red">*</span>
+                        </div>
+                        <div class="col-md-11">
+                            <input name="expenseDate" type="text" placeholder="MM/DD/YYYY" min="1/1/2000" ng-required="true" ng-model="newExpense.ExpenseDate" ng-pattern="/^(0?[1-9]|1[012])\/(0?[1-9]|[12][0-9]|3[01])\/([2-9][0-9][0-9][1-9])$/" />
+                            <span ng-show="expenseForm.expenseDate.$error.pattern" style="color:red">Date Format should be MM/DD/YYYY and Cannot be before 1/1/2000</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row top-buffer">
-                <div class="col-md-12">
-                    <div class="col-md-1">
-                        Category:
-                    </div>
-                    <div class="col-md-11">
-                        <input type="text" ng-model="expense.category" />
-                    </div>
-                </div>
-            </div>
-            <div class="row top-buffer">
-                <div class="col-md-12">
-                    <div class="col-md-1">
-                        Subcategory:
-                    </div>
-                    <div class="col-md-11">
-                        <input type="text" ng-model="expense.subCategory" />
+                <div class="row top-buffer">
+                    <div class="col-md-12">
+                        <div class="col-md-1">
+                            Description<span style="margin-left:3px;color:red">*</span>
+                        </div>
+                        <div class="col-md-4">
+                            <input name="expDescription" type="text" ng-model="newExpense.Description" maxlength="50" ng-required="true" style="width:100%;box-sizing:border-box;" />
+                            <span ng-show="expenseForm.expDescription.$error.required" hidden>Required!</span>
+                        </div>
+                        <div class="col-md-7">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row top-buffer">
-                <div class="col-md-12">
-                    <div class="col-md-1">
-                        Amount:
-                    </div>
-                    <div class="col-md-11">
-                        <input type="text" ng-model="expense.amount" />
-                    </div>
-                </div>
-            </div>
-            <div class="row top-buffer">
-                <div class="col-md-12">
-                    <div class="col-md-3">
-                        <a href="/" class="btn btn-primary btn-md">Save</a>
-                    </div>
-                </div>
-            </div>
-            <br />
-            <h3>Submitted</h3>
-            <div class="row">
-                <div class="col-md-6">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <td><a href="/" style="color:blue;text-decoration:underline"><strong>Date</strong></a></td>
-                                <td><strong>Description</strong></td>
-                                <td><strong>Category</strong></td>
-                                <td><strong>Subcategory</strong></td>
-                                <td><strong>Amount</strong></td>
-                            </tr>
-                        </thead>
-                        <tr ng-repeat="expense in expenses">
-                            <td>{{expense.ExpenseDate}}</td>
-                            <td>{{expense.Description}}</td>
-                            <td>{{expense.Category}}</td>
-                            <td>{{expense.SubCategory}}</td>
-                            <td>{{expense.ExpenseAmount}}</td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="col-md-6">
-                </div>
-            </div>
-        </div>
-    </div>
+                <div class="row top-buffer">
+                    <div class="col-md-12">
+                        <div class="col-md-1">
+                            Category<span style="margin-left:3px;color:red">*</span>
+                        </div>
+                        <div class="col-md-11">
 
+                            @*<input type="text" ng-model="customSelected" placeholder="Custom template" typeahead="state as state.name for state in statesWithFlags | filter:{name:$viewValue}" typeahead-template-url="customTemplate.html" class="form-control ng-valid ng-dirty ng-valid-parse ng-touched" aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-65-1967">*@
+
+                            @*<input name="expCategory" type="text" ng-model="newExpense.Category" typeahead="category as expense.Category for expense in expenses | filter:$viewValue | limitTo:8" maxlength="25" ng-required="true" ng-pattern="/^[a-zA-Z0-9]+$/" class="form-control ng-valid ng-dirty ng-valid-parse ng-touched" aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-65-1967">*@
+
+                            <input name="expCategory" type="text" ng-model="newExpense.Category" maxlength="25" ng-required="true" ng-pattern="/^[a-zA-Z0-9]+$/" />
+                            <span ng-show="expenseForm.expCategory.$error.pattern" style="color:red">Cannot contain special characters</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row top-buffer">
+                    <div class="col-md-12">
+                        <div class="col-md-1">
+                            Subcategory<span style="margin-left:3px;color:red">*</span>
+                        </div>
+                        <div class="col-md-11">
+                            <input name="expSubCategory" type="text" ng-model="newExpense.SubCategory" ng-required="true" ng-pattern="/^[a-zA-Z0-9]+$/" />
+                            <span ng-show="expenseForm.expSubCategory.$error.pattern" style="color:red">Cannot contain special characters</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row top-buffer">
+                    <div class="col-md-12">
+                        <div class="col-md-1">
+                            Amount<span style="margin-left:3px;color:red">*</span>
+                        </div>
+                        <div class="col-md-11">
+                            <input name="expAmount" type="text" ng-model="newExpense.ExpenseAmount" maxlength="10" ng-required="true" ng-pattern="/^\$(\d{1,3}(\,\d{3})*|(\d+))(\.\d{1,2})?$/" />
+                            <span ng-show="expenseForm.expAmount.$error.pattern" style="color:red">Invalid amount. Should be like $12.00 or $12</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row top-buffer">
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            <a href="" class="btn btn-primary btn-md" ng-click="saveExpense()" ng-disabled="expenseForm.expAmount.$invalid||expenseForm.expSubCategory.$invalid||expenseForm.expCategory.$invalid||expenseForm.expDescription.$invalid||expenseForm.expenseDate.$invalid">Save</a>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <h3>Submitted</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <td><a href="/" style="color:blue;text-decoration:underline"><strong>Date</strong></a></td>
+                                    <td><strong>Description</strong></td>
+                                    <td><strong>Category</strong></td>
+                                    <td><strong>Subcategory</strong></td>
+                                    <td><strong>Amount</strong></td>
+                                </tr>
+                            </thead>
+                            <tr ng-repeat="expense in expenses">
+                                <td>{{expense.ExpenseDate}}</td>
+                                <td>{{expense.Description}}</td>
+                                <td>{{expense.Category}}</td>
+                                <td>{{expense.SubCategory}}</td>
+                                <td>{{expense.ExpenseAmount}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

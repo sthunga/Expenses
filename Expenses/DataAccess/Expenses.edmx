@@ -5,79 +5,46 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="ExpensesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Expenses.dbo.Expenses' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="Expenses">
+        <EntityType Name="Expense">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="ExpenseDate" />
-            <PropertyRef Name="ExpenseAmount" />
-            <PropertyRef Name="Category" />
-            <PropertyRef Name="SubCategory" />
-            <PropertyRef Name="Description" />
-            <PropertyRef Name="DateCreated" />
-            <PropertyRef Name="UserCreated" />
-            <PropertyRef Name="DateModified" />
-            <PropertyRef Name="UserModified" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ExpenseDate" Type="datetime" Nullable="false" />
-          <Property Name="ExpenseAmount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="Category" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="SubCategory" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
-          <Property Name="DateCreated" Type="datetime" Nullable="false" />
-          <Property Name="UserCreated" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="DateModified" Type="datetime" Nullable="false" />
-          <Property Name="UserModified" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ExpenseDate" Type="date" Nullable="false" />
+          <Property Name="ExpenseAmount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="DateCreated" Type="date" Nullable="false" />
+          <Property Name="UserCreated" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="DateModified" Type="date" Nullable="false" />
+          <Property Name="UserModified" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityContainer Name="ExpensesModelStoreContainer">
-          <EntitySet Name="Expenses" EntityType="Self.Expenses" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Expenses].[Id] AS [Id], 
-    [Expenses].[ExpenseDate] AS [ExpenseDate], 
-    [Expenses].[ExpenseAmount] AS [ExpenseAmount], 
-    [Expenses].[Category] AS [Category], 
-    [Expenses].[SubCategory] AS [SubCategory], 
-    [Expenses].[Description] AS [Description], 
-    [Expenses].[DateCreated] AS [DateCreated], 
-    [Expenses].[UserCreated] AS [UserCreated], 
-    [Expenses].[DateModified] AS [DateModified], 
-    [Expenses].[UserModified] AS [UserModified]
-    FROM [dbo].[Expenses] AS [Expenses]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="Expense" EntityType="Self.Expense" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ExpensesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Expens">
+        <EntityType Name="Expense">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="ExpenseDate" />
-            <PropertyRef Name="ExpenseAmount" />
-            <PropertyRef Name="Category" />
-            <PropertyRef Name="SubCategory" />
-            <PropertyRef Name="Description" />
-            <PropertyRef Name="DateCreated" />
-            <PropertyRef Name="UserCreated" />
-            <PropertyRef Name="DateModified" />
-            <PropertyRef Name="UserModified" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ExpenseDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ExpenseAmount" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="SubCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="UserCreated" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="DateModified" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="UserModified" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ExpenseDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ExpenseAmount" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UserCreated" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateModified" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UserModified" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityContainer Name="ExpensesContext" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Expenses" EntityType="Self.Expens" />
+          <EntitySet Name="Expenses" EntityType="Self.Expense" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -86,14 +53,14 @@ warning 6002: The table/view 'Expenses.dbo.Expenses' does not have a primary key
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ExpensesModelStoreContainer" CdmEntityContainer="ExpensesContext">
           <EntitySetMapping Name="Expenses">
-            <EntityTypeMapping TypeName="ExpensesModel.Expens">
-              <MappingFragment StoreEntitySet="Expenses">
+            <EntityTypeMapping TypeName="ExpensesModel.Expense">
+              <MappingFragment StoreEntitySet="Expense">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ExpenseDate" ColumnName="ExpenseDate" />
-                <ScalarProperty Name="ExpenseAmount" ColumnName="ExpenseAmount" />
                 <ScalarProperty Name="Category" ColumnName="Category" />
                 <ScalarProperty Name="SubCategory" ColumnName="SubCategory" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ExpenseDate" ColumnName="ExpenseDate" />
+                <ScalarProperty Name="ExpenseAmount" ColumnName="ExpenseAmount" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="UserCreated" ColumnName="UserCreated" />
                 <ScalarProperty Name="DateModified" ColumnName="DateModified" />

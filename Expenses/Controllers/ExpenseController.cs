@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Expenses.Models;
+using Expenses.DataAccess;
 
 namespace Expenses.Controllers
 {
@@ -19,7 +20,7 @@ namespace Expenses.Controllers
             {
                 using (var db = new ExpensesContext())
                 {
-                    foreach (Expens expense in db.Expenses.ToList())
+                    foreach (Expense expense in db.Expenses.ToList())
                     {
                         expenses.Add(new ExpenseModel()
                         {
@@ -43,27 +44,44 @@ namespace Expenses.Controllers
         [HttpPost]
         public string Post(ExpenseModel model)
         {
-            try
+            
+
+            if (model != null)
             {
-                using (var db = new ExpensesContext())
+                try
                 {
-                    db.Expenses.Add(new Expens()
+                    using (var db = new ExpensesContext())
                     {
-                        Category = model.Category,
-                        Description = model.Description,
-                        ExpenseAmount = Convert.ToDecimal(model.ExpenseAmount),
-                        ExpenseDate = model.ExpenseDate,
-                        SubCategory = model.SubCategory,
-                        UserCreated = "UserID",//If this is new record
-                        UserModified = "UserID"
-                    });
+                        db.Expenses.Add(new Expense()
+                        {
+                            Category = model.Category,
+                            Description = model.Description,
+                            ExpenseAmount = Convert.ToDecimal(model.ExpenseAmount),
+                            ExpenseDate = model.ExpenseDate,
+                            SubCategory = model.SubCategory,
+                            UserCreated = "UserID",//If this is new record
+                            UserModified = "UserID"
+                        });
+                        if (db.SaveChanges() > 0)
+                        {
+                            return "success";
+                        }
+                        else
+                        {
+                            return "No new expense item added";
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    //Handle or Log
+                    return "Error";
                 }
             }
-            catch (Exception ex)
+            else
             {
-                //Handle
+                return "Enter Values";
             }
-            return "success";
         }
     }
 }
