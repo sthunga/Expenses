@@ -5,7 +5,7 @@ app.controller('ExpCtrl', function ($scope, $http) {
         $scope.expenses = response;
     }).
     error(function (data, status, headers, config) {
-        alert("");
+        //Handle Errors
     });
 
     $scope.saveExpense = function () {
@@ -22,11 +22,11 @@ app.controller('ExpCtrl', function ($scope, $http) {
                         $scope.newExpense.ExpenseAmount = '';
                     }
                     else {
-
+                        //Handle Failure Conditions
                     }
                 })
                 .error(function (data, status, headers, config) {
-                    alert("");
+                    //Handle Errors
                 });
     };
 });
