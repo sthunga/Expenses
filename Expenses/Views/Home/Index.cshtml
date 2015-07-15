@@ -21,7 +21,7 @@
                             Date<span style="margin-left:3px;color:red">*</span>
                         </div>
                         <div class="col-md-11">
-                            <input name="expenseDate" type="text" placeholder="MM/DD/YYYY" min="1/1/2000" ng-required="true" ng-model="newExpense.ExpenseDate" ng-pattern="/^(0?[1-9]|1[012])\/(0?[1-9]|[12][0-9]|3[01])\/([2-9][0-9][0-9][1-9])$/" />
+                            <input name="expenseDate" type="text" placeholder="MM/DD/YYYY" ng-required="true" ng-model="newExpense.ExpenseDate" ng-pattern="/^(0?[1-9]|1[012])\/(0?[1-9]|[12][0-9]|3[01])\/(2?[0-9][0-9][1-9]|[3-9][0-9][0-9][0-9])$/" />
                             <span ng-show="expenseForm.expenseDate.$error.pattern" style="color:red">Date Format should be MM/DD/YYYY and Cannot be before 1/1/2000</span>
                         </div>
                     </div>
@@ -67,8 +67,8 @@
                             Amount<span style="margin-left:3px;color:red">*</span>
                         </div>
                         <div class="col-md-11">
-                            <input name="expAmount" type="text" ng-model="newExpense.ExpenseAmount" maxlength="10" ng-required="true" ng-pattern="/^\$(\d{1,3}(\,\d{3})*|(\d+))(\.\d{1,2})?$/" />
-                            <span ng-show="expenseForm.expAmount.$error.pattern" style="color:red">Invalid amount. Should be like $12.00 or $12</span>
+                            <input name="expAmount" type="text" ng-model="newExpense.ExpenseAmount" maxlength="10" ng-required="true" ng-pattern="/^(\d{1,3}(\,\d{3})*|(\d+))(\.\d{1,2})?$/" />
+                            <span ng-show="expenseForm.expAmount.$error.pattern" style="color:red">Invalid amount. Should be like 12.00 or 12</span>
                         </div>
                     </div>
                 </div>

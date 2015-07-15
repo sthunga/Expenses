@@ -5,72 +5,69 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Expenses.Models;
-using Expenses.DataAccess;
+using Expenses.Data;
 
 namespace Expenses.Controllers
 {
     public class ExpenseController : ApiController
     {
+        private ExpensesContext db = new ExpensesContext();
+
         [HttpGet]
         public IEnumerable<ExpenseModel> Get()
         {
             List<ExpenseModel> expenses = new List<ExpenseModel>();
-
-            try
+            foreach (DbExpense expense in db.Expenses.ToList())
             {
-                using (var db = new ExpensesContext())
+                expenses.Add(new ExpenseModel()
                 {
-                    foreach (Expense expense in db.Expenses.ToList())
-                    {
-                        expenses.Add(new ExpenseModel()
-                        {
-                            ExpenseDate = expense.ExpenseDate,
-                            Description = expense.Description,
-                            Category = expense.Category,
-                            SubCategory = expense.SubCategory,
-                            ExpenseAmount = Convert.ToDouble(expense.ExpenseAmount)
-                        });
-                    }
-                }
+                    ExpenseDate = expense.ExpenseDate,
+                    Description = expense.Description,
+                    Category = expense.Category,
+                    SubCategory = expense.SubCategory,
+                    ExpenseAmount = Convert.ToDouble(expense.ExpenseAmount)
+                });
             }
-            catch (Exception ex)
-            {
-                //Handler
-            }
-
             return expenses;
         }
 
         [HttpPost]
         public string Post(ExpenseModel model)
         {
-            
-
             if (model != null)
             {
                 try
                 {
-                    using (var db = new ExpensesContext())
+                    DbExpense dbExp = new DbExpense()
                     {
-                        db.Expenses.Add(new Expense()
-                        {
-                            Category = model.Category,
-                            Description = model.Description,
-                            ExpenseAmount = Convert.ToDecimal(model.ExpenseAmount),
-                            ExpenseDate = model.ExpenseDate,
-                            SubCategory = model.SubCategory,
-                            UserCreated = "UserID",//If this is new record
-                            UserModified = "UserID"
-                        });
-                        if (db.SaveChanges() > 0)
-                        {
-                            return "success";
-                        }
-                        else
-                        {
-                            return "No new expense item added";
-                        }
-                    }
+                        Category = model.Category,
+                        Description = model.Description,
+                        ExpenseAmount = Convert.ToDecimal(model.ExpenseAmount),
+                        ExpenseDate = model.ExpenseDate,
+                        SubCategory = model.SubCategory,
+                        UserCreated = "UserID",//If this is new record
+                        UserModified = "UserID",
+                        DateCreated = DateTime.Now,
+                        DateModified = DateTime.Now
+
+                    };
+                    //db.Expenses.Add(new DbExpense()
+                    //{
+                    //    Category = model.Category,
+                    //    Description = model.Description,
+                    //    ExpenseAmount = Convert.ToDecimal(model.ExpenseAmount),
+                    //    ExpenseDate = model.ExpenseDate,
+                    //    SubCategory = model.SubCategory,
+                    //    UserCreated = "UserID",//If this is new record
+                    //    UserModified = "UserID"
+                    //});
+                    //db.SaveChangesAsync();
+                    //return "success";
+
+                    db.Entry(dbExp).State = System.Data.Entity.EntityState.Added;
+                    db.SaveChanges();
+                    return "success";
+
                 }
                 catch (Exception ex)
                 {

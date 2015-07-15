@@ -175,24 +175,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ExpenseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="DataAccess\Expense.cs">
-      <DependentUpon>Expenses.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataAccess\Expenses.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Expenses.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataAccess\Expenses.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Expenses.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataAccess\Expenses.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Expenses.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -213,7 +195,9 @@
     <Content Include="Scripts\expenses.js" />
     <Content Include="Scripts\ui-bootstrap-tpls-0.13.0.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -229,28 +213,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <EntityDeploy Include="DataAccess\Expenses.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Expenses.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="DataAccess\Expenses.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Expenses.edmx</DependentUpon>
-      <LastGenOutput>Expenses.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="DataAccess\Expenses.edmx.diagram">
-      <DependentUpon>Expenses.edmx</DependentUpon>
-    </Content>
-    <Content Include="DataAccess\Expenses.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Expenses.edmx</DependentUpon>
-      <LastGenOutput>Expenses.cs</LastGenOutput>
-    </Content>
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\angular.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Expenses.Data\Expenses.Data.csproj">
+      <Project>{1ddba3aa-f690-4c8f-adce-b7aee6ca2e9f}</Project>
+      <Name>Expenses.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

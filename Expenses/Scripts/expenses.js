@@ -9,7 +9,7 @@ app.controller('ExpCtrl', function ($scope, $http) {
     });
 
     $scope.saveExpense = function () {
-        if ($valid)
+        if ($scope.expenseForm.$valid) {
             $http.post('api/Expense', $scope.newExpense)
                 .success(function (response) {
                     var returnMessage = angular.fromJson(response);
@@ -28,5 +28,6 @@ app.controller('ExpCtrl', function ($scope, $http) {
                 .error(function (data, status, headers, config) {
                     //Handle Errors
                 });
+        }
     };
 });
